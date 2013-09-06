@@ -1,6 +1,5 @@
 function results = weak_square_loss(params, bags, tframes, Kf, Kof, GTf, T)
 
-setenv('MOSEKLM_LICENSE_FILE', params.mosek_license);
 
 % making kernels PSD
 [Kf, Kof] = make_PSD(Kf, Kof);

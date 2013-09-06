@@ -1,18 +1,7 @@
-function [resultF, resultA] = joint_optimisation()
-% function that iterates bewtween face and action optimization. As there
-% was no change after the first iteration (see article), this code does 
-% not contain a loop.
+function [resultF, resultA] = joint_optimisation(datapath)
 
-
-% [ Kf, Kof, Ka, Koa, GTf, GTa, tframes, trackid ] = load_data(Kf, Ka, Koa, GTf, GTa, fdpath);
-% 
-% toeval = toeval(trackid);
-% 
-% save('data.mat', 'Kf', 'Kof', 'Ka', 'Koa', 'GTf', 'GTa', 'tframes', 'toeval', 'bags');
-
-load('data.mat');
-
-%%
+% loading the data
+load(datapath);
 
 % getting the number of persons and number of actions
 P = max(GTf);

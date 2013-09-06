@@ -9,15 +9,8 @@ params = struct('coordinate', 'actions', ...
                 'kapa', kapa, ...
                 'lambda', lambda, ...
                 'neg_bag', false, ...
-                'cut_crowds', true, ...         % flag to decide whether or not to remove crowded scenes
-                'cut_threshold', 30, ...        % max size of crowds in bags
-                'opt_flag', 'MOSEK_NORM', ...  % kind of optimization performed
-                'mosek_license', '/sequoia/data1/bojanows/local/mosek/6/licenses');
+                'cut_crowds', true, ...     % flag to decide whether or not to remove crowded scenes
+                'cut_threshold', 30, ...    % max size of crowds in bags
+                'opt_flag', 'MOSEK_NORM');  % kind of optimization performed
 
-if nargin > 4
-    params.kothpath = kothpath;
-else
-    fprintf('No others specified!\n');
-end
-            
 end
