@@ -30,6 +30,7 @@ if strcmp(params.opt_flag, 'feasibility'); % feasibility USING CVX
     variable Z(n, P);
     variable xi1(nConst);
     
+    
     minimize (kapa * norm(xi1))
     
     for j = 1:nConst

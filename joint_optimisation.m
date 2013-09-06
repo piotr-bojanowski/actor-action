@@ -39,20 +39,19 @@ Z{3} = full(sparse(1:N, GTf, 1, N, P));
 params.neg_bag = false;
 params.opt_flag = 'MOSEK_NORM';
 [restemp, ~] = weak_square_loss(params, bags, tframes, Ka, Koa, GTa, Z{1});
-resultA{1} = evaluate_action(toeval, restemp, trackid);
-
+resultA{1} = evaluate(restemp.Z(toeval, :), restemp.Y(toeval, :));
 
 % computing with GT face matrix
 params.neg_bag = false;
 params.opt_flag = 'MOSEK_NORM';
 [restemp, ~] = weak_square_loss(params, bags, tframes, Ka, Koa, GTa, Zgt);
-resultA{3} = evaluate_action(toeval, restemp, trackid);
+resultA{3} = evaluate_action(toeval, restemp);
 
 % computing with random face matrix
 params.neg_bag = false;
 params.opt_flag = 'MOSEK_NORM';
 [restemp, ~] = weak_square_loss(params, bags, tframes, Ka, Koa, GTa, Zrand);
-resultA{4} = evaluate_action(toeval, restemp, trackid);
+resultA{4} = evaluate_action(toeval, restemp);
 
 % computing with only face+text
 params.kapa = 10;
@@ -60,7 +59,7 @@ params.alpha = 100;
 params.opt_flag = 'feasibility';
 params.neg_bag = true;
 [restemp, ~] = weak_square_loss(params, bags, tframes, Ka, Koa, GTa, Zproj);
-resultA{5} = evaluate_action(toeval, restemp, trackid);
+resultA{5} = evaluate_action(toeval, restemp);
 
 % computing with text + GT faces
 params.kapa = 10;
@@ -68,6 +67,6 @@ params.alpha = 100;
 params.opt_flag = 'feasibility';
 params.neg_bag = true;
 [restemp, ~] = weak_square_loss(params, bags, tframes, Ka, Koa, GTa, Zgt);
-resultA{6} = evaluate_action(toeval, restemp, trackid);
+resultA{6} = evaluate_action(toeval, restemp);
 
 end
