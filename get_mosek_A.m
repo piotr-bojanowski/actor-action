@@ -1,6 +1,4 @@
-function [ A, blc, buc ] = get_mosek_A( IA, IB, B, alpha, opt_flag)
-%GET_MOSEK_A Summary of this function goes here
-%   Detailed explanation goes here
+function [ A, blc, buc ] = get_mosek_A( IA, IB, B, alpha)
 
 n   = length(IA{1});
 P   = length(IB{1});
@@ -31,25 +29,22 @@ A = [A, [Z; AXi]];
 A = sparse(A);
 
 blc = [ones(n, 1); alpha * ones(length(IB), 1)];
-% blc = [ones(n, 1); sqrt(nel)];
 buc = [ones(n, 1); inf(length(IB), 1)];
 
 
-if strcmp(opt_flag, 'MOSEK_NORM')
-    Bs = sparse(B);
-    Is = sparse(eye(P));
-    AY1 = kron(Is, Bs);
-    AY2 = sparse(n*P, nXi);
-    AY3 = - sparse(1:(n*P), 1:(n*P), 1);
-    AY = cat(2, AY1, AY2, AY3);
-    
-    AZ = sparse(size(A,1), n*P);
-    A = cat(2, A, AZ);
-    A = cat(1, A, AY);
-    
-    blc = cat(1, blc, zeros(n*P,1));
-    buc = cat(1, buc, zeros(n*P,1));
-end
+Bs = sparse(B);
+Is = sparse(eye(P));
+AY1 = kron(Is, Bs);
+AY2 = sparse(n*P, nXi);
+AY3 = - sparse(1:(n*P), 1:(n*P), 1);
+AY = cat(2, AY1, AY2, AY3);
+
+AZ = sparse(size(A,1), n*P);
+A = cat(2, A, AZ);
+A = cat(1, A, AY);
+
+blc = cat(1, blc, zeros(n*P,1));
+buc = cat(1, buc, zeros(n*P,1));
 
 
 end
