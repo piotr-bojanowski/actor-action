@@ -1,4 +1,4 @@
-function [results] = evaluate(Z, Y)
+function results = evaluate(Z, Y)
 
 P = size(Y,2);
 

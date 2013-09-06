@@ -32,9 +32,9 @@ jbagpath    = fullfile(rootdir, 'clips42.mat');
 temp        = load(jbagpath);
 joint_bags  = temp.clips42;
 
-
 bags = merge_bags(init_scene, joint_bags, cast);
 
 
-[resultF, resultA, restemp, trackid] = joint_optimisation(Kf, GTf, Ka, Koa, GTa, fdpath, bags, toeval);
+%%
 
+[resultF, resultA] = joint_optimisation(Kf, GTf, Ka, Koa, GTa, fdpath, bags, toeval);

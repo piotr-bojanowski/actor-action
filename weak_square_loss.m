@@ -1,25 +1,21 @@
-function [ results, Z ] = weak_square_loss(params, bags, tframes, Kf, Kof, GTf, T)
+function results = weak_square_loss(params, bags, tframes, Kf, Kof, GTf, T)
 
 setenv('MOSEKLM_LICENSE_FILE', params.mosek_license);
 
 % making kernels PSD
 [Kf, Kof] = make_PSD(Kf, Kof);
 
-
 % building the bags - kernel, constraints
 [Ka, Y, A_ind, B_ind, others_idx] = build_bags(params, bags, Kf, Kof, GTf, T, tframes);
-
 
 alpha       = params.alpha;
 kapa        = params.kapa;
 lambda      = params.lambda;
 
-
 % fixing parameters of the minimization program
 [n, P]  = size(Y);        % number of tracks / number of classes
 nConst  = length(A_ind);  % number of annotations
 ep      = ones(P, 1);     % constant vector of ones
-
 
 if strcmp(params.opt_flag, 'feasibility'); % feasibility USING CVX
     
@@ -29,7 +25,6 @@ if strcmp(params.opt_flag, 'feasibility'); % feasibility USING CVX
     cvx_begin
     variable Z(n, P);
     variable xi1(nConst);
-    
     
     minimize (kapa * norm(xi1))
     
@@ -62,10 +57,8 @@ else
     
 end
 
-
 % removing others and evaluating
 idx = setdiff(1:size(Y,1), others_idx);
 results = evaluate(Z(idx, :), Y(idx, :));
-Z = Z(idx,:);
 
 end
