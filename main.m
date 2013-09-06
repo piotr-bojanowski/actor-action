@@ -1,9 +1,9 @@
 
 % path to the mosek toolbox folder
-mosek_path = '/nas/home2/b/bojanows/Documents/MATLAB/mosek/6/toolbox/r2009b';
+mosek_path = '/nas/home2/b/bojanows/Documents/MATLAB/mosek/7/toolbox/r2009b';
 
 % path to the mosek licence folder
-mosek_license = '/sequoia/data1/bojanows/local/mosek/6/licenses';
+mosek_license = '/sequoia/data1/bojanows/local/mosek/7/licenses';
 
 % path to the cvx_setup.m file
 cvx_path = '~/Documents/MATLAB/cvx/cvx_setup.m'; 
@@ -15,3 +15,5 @@ run(cvx_path);
 datapath = './data.mat';
 
 [resultF, resultA] = joint_optimisation(datapath);
+
+paper_plots(resultF, resultA);

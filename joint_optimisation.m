@@ -26,8 +26,8 @@ resultF = weak_square_loss(params, bags(isface), tframes, Kf, Kof, GTf, T);
 Z{1}    = resultF.Z;
 
 % computing different Z matrices
-temp = ones(size(Z));
-z = max(Z{1}, [], 2);
+temp = ones(size(Z{1}));
+[~, z] = max(Z{1}, [], 2);
 Z{2} = bsxfun(@times, temp, 1 ./ sum(temp, 2));
 Z{3} = full(sparse(1:N, GTf, 1, N, P));
 Z{4} = full(sparse(1:N, z, 1, N, P));
