@@ -12,6 +12,8 @@ You also have to provide the path to the data file.
 
 To run simply type :
 
+```
 >> main
+```
 
 in the MATLAB comand prompt. 
