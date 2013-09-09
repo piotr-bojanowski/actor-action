@@ -4,14 +4,10 @@ function [ Ka, Y, A_ind, B_ind, others_idx] = build_bags(params, bags, K, Ko, GT
 
 N = size(K, 1);
 
-if ~isempty(Ko)
-    Kpn = Ko(:, 1:N);
-    Knn = Ko(:, N+1:end);
-else
-    Kpn = Ko(:, 1:N);
-    Knn = zeros(0,0);
-end
+Kpn = Ko(:, 1:N);
+Knn = Ko(:, N+1:end);
 
+% checking which track is in which bag
 A = tracks_in_bag(bags, tframes);
 
 % removing bags where there are too many tracks
